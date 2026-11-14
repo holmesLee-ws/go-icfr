@@ -14,7 +14,7 @@
 
 ## 재개 (`learner/state.json`이 있을 때)
 
-1. `state.json`과 `log.md` 끝부분을 읽는다. `current.module`이 X1이거나 `learner/lab/`에 산출물이 있으면 그 파일도 읽고, 이미 채운 칸을 이어서 채운다(틀을 다시 만들지 않는다).
+1. `state.json`과 `log.md` 끝부분을 읽는다. `current.module`이 X1이거나 `learner/lab/`에 산출물이 있으면 그 파일도 읽고, 이미 채운 칸을 이어서 채운다(틀을 다시 만들지 않는다). `learner/` 안의 파일 확인은 Glob·Read로 하고 Bash(`ls` 등)를 쓰지 않는다.
 2. 지난번 어디까지 했는지 한 줄로 말한다. `current.pending_probe`에 답하지 않은 탐침이 있으면 복습보다 먼저 그것을 다시 낸다.
 3. `review_at`이 지난 모듈이 있으면 가장 오래된 것에서 복습 질문을 하나 낸다. 없으면 바로 이어간다.
 4. 학습자가 이어갈지 다른 것을 할지 고르게 한다.
@@ -27,7 +27,7 @@
 3. **반복**: 아래 비트를 돈다. 빈틈을 다루기 시작하는 차례에 `current.path`를 `gap`으로 적고, 그 모듈을 떠나기 전에 학습자의 답을 담은 도식을 만든다.
 4. **마무리**: 목표 수준에 맞는 증거를 얻는다. Explain은 자기 말로 설명, Apply는 새 상황에서 직접 판단·작성, Evaluate는 선택지를 비교해 근거와 함께 결정, Develop은 만들어 낸 산출물로 본다. `curriculum/map.md`의 「만들어 볼 것」은 예시다. 학습자의 업무에 더 맞는 과제가 있으면 바꾼다.
 5. **기록**: `state.json`을 고치고 `log.md`에 한 줄을 더한다.
-6. **다음 모듈**: `curriculum/map.md`의 선수 관계와 `state.json`을 대조한다. 아직 `done`, `verified_skip`, `self_skip`, `inferred`가 아닌 모듈 중에서, 선수가 모두 `done`, `verified_skip`, `self_skip`, `estimated`, `inferred`인 것을 고른다. 기본 순서(F → L → D → E → X)상 가장 앞선 것을 추천하되, 학습자의 목표에 더 가까운 것이 있으면 이유를 말하고 함께 제시한다.
+6. **다음 모듈**: `curriculum/map.md`의 선수 관계와 `state.json`을 대조한다. 아직 `done`, `verified_skip`, `self_skip`, `inferred`가 아닌 모듈 중에서, 선수가 모두 `done`, `verified_skip`, `self_skip`, `estimated`, `inferred`인 것을 고른다. 영역 빠른 확인으로 선수가 아직 비어 있는 심화 모듈을 제안할 때는 「선수 X·Y는 이 탐침으로 함께 추론합니다」라고 한 줄 말한다. 기본 순서(F → L → D → E → X)상 가장 앞선 것을 추천하되, 학습자의 목표에 더 가까운 것이 있으면 이유를 말하고 함께 제시한다.
 
 ## 실무 자료와 산출물
 

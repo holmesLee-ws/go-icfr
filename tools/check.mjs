@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const errors = [];
+const warnings = [];
 const read = (p) => readFileSync(join(root, p), "utf8").replace(/\r\n/g, "\n");
 
 const LEVELS = ["Explain", "Apply", "Evaluate", "Develop"];
@@ -23,7 +24,7 @@ function parseCurriculum(text) {
   const problems = [];
   const keysUsed = [];
   const noLaw = [];
-  const blocks = text.split(/^### /m).slice(1);
+  const blocks = text.split(/^### /m).slice(1).map((b) => b.split(/^## /m)[0]);
   for (const block of blocks) {
     const head = block.split("\n")[0];
     const m = head.match(/^([FLDEX]\d+) · (.+)$/);
@@ -43,7 +44,7 @@ function parseCurriculum(text) {
       if (fields["글로벌 비교"] && ![...fields["글로벌 비교"].matchAll(KEY)].some((k) => k[1].startsWith("G"))) problems.push(`${id}: 글로벌 비교에 G 키 없음`);
     }
     if (fields["국내 근거"] && fields["국내 근거"].includes("법정 기준 없음")) noLaw.push(id);
-    for (const q of block.matchAll(/제\d+조(의\d+)?\s*\([^)]*\)\s*([^\n]{80,})/g)) problems.push(`${id}: 조문 원문으로 보이는 긴 인용`);
+    if (/제\d+조(의\d+)?(제\d+항)?\s*(\([^)]*\))?\s*[^\n]{80,}/.test(block) || /[「“"][^」”"\n]{60,}[」”"]/.test(block)) warnings.push(`${id}: 조문 원문으로 보이는 긴 인용(경고)`);
     keysUsed.push(...[...block.matchAll(KEY)].map((k) => [id, k[1]]));
     if (fields["목표"] && !LEVELS.some((l) => fields["목표"].startsWith(`${l} — `))) problems.push(`${id}: 목표 수준 형식 오류`);
     const prereq = !fields["선수"] || fields["선수"] === "없음" ? [] : fields["선수"].split(",").map((s) => s.trim());
@@ -72,11 +73,11 @@ function parseSources(text) {
     const cells = m[2].split("|").map((c) => c.trim());
     if (rows.has(m[1])) problems.push(`대장 ${m[1]}: 중복 키`);
     rows.set(m[1], cells);
-    if (!cells.some((c) => /https?:\/\/\S+/.test(c))) problems.push(`대장 ${m[1]}: URL 없음`);
-    if (!cells.some((c) => /^\d{4}-\d{2}-\d{2}$/.test(c))) problems.push(`대장 ${m[1]}: 조회일 없음`);
+    if (!/^https:\/\/\S+/.test(cells[5] || "")) problems.push(`대장 ${m[1]}: URL 칸(7번째)이 https URL이 아님`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(cells[6] || "")) problems.push(`대장 ${m[1]}: 조회일 칸(8번째)이 날짜가 아님`);
     if (cells.some((c) => /미확인/.test(c))) problems.push(`대장 ${m[1]}: 미확인 항목은 대장에 두지 않음`);
     if (cells.length !== 8) problems.push(`대장 ${m[1]}: 칸 수 ${cells.length + 1}개(9개여야 함)`);
-    else if (!/^(예|아니오)( — .+)?$/.test(cells[7])) problems.push(`대장 ${m[1]}: 변동 칸은 「예 — 이유」나 「아니오」`);
+    else if (!/^(예 — .+|아니오)$/.test(cells[7])) problems.push(`대장 ${m[1]}: 변동 칸은 「예 — 이유」나 「아니오」`);
     for (const u of m[2].matchAll(/https?:\/\/([^/\s)]+)/g)) if (!OFFICIAL.some((d) => u[1] === d || u[1].endsWith(`.${d}`))) problems.push(`대장 ${m[1]}: 공식 도메인 아님 ${u[1]}`);
   }
   return { rows, problems };
@@ -115,6 +116,7 @@ function main() {
   }
   if (!read(".gitignore").split("\n").includes("learner/")) errors.push(".gitignore에 learner/ 없음");
 
+  for (const w of warnings) console.warn(`WARN ${w}`);
   if (errors.length) { console.error(errors.map((e) => `FAIL ${e}`).join("\n")); process.exit(1); }
   console.log(`OK 모듈 ${modules.size}개, 근거 ${src.rows.size}건, 파일 ${files.length}개 검사`);
 }

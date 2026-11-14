@@ -44,7 +44,7 @@ function parseCurriculum(text) {
       if (fields["글로벌 비교"] && ![...fields["글로벌 비교"].matchAll(KEY)].some((k) => k[1].startsWith("G"))) problems.push(`${id}: 글로벌 비교에 G 키 없음`);
     }
     if (fields["국내 근거"] && fields["국내 근거"].includes("법정 기준 없음")) noLaw.push(id);
-    if (/제\d+조(의\d+)?(제\d+항)?\s*(\([^)]*\))?\s*[^\n]{80,}/.test(block) || /[「“"][^」”"\n]{60,}[」”"]/.test(block)) warnings.push(`${id}: 조문 원문으로 보이는 긴 인용(경고)`);
+    for (const v of Object.values(fields)) if (/제\d+조(의\d+)?(제\d+항)?\s*\([^)]*\)\s*[^\n]{80,}/.test(v) || /[「“"][^」”"\n]{60,}[」”"]/.test(v)) warnings.push(`${id}: 조문 원문으로 보이는 긴 인용(경고)`);
     keysUsed.push(...[...block.matchAll(KEY)].map((k) => [id, k[1]]));
     if (fields["목표"] && !LEVELS.some((l) => fields["목표"].startsWith(`${l} — `))) problems.push(`${id}: 목표 수준 형식 오류`);
     const prereq = !fields["선수"] || fields["선수"] === "없음" ? [] : fields["선수"].split(",").map((s) => s.trim());
@@ -73,7 +73,7 @@ function parseSources(text) {
     const cells = m[2].split("|").map((c) => c.trim());
     if (rows.has(m[1])) problems.push(`대장 ${m[1]}: 중복 키`);
     rows.set(m[1], cells);
-    if (!/^https:\/\/\S+/.test(cells[5] || "")) problems.push(`대장 ${m[1]}: URL 칸(7번째)이 https URL이 아님`);
+    if (!(cells[5] || "").split(/\s+/).every((u) => /^https:\/\/\S+$/.test(u))) problems.push(`대장 ${m[1]}: URL 칸(7번째)이 공백으로 나눈 https URL이 아님`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(cells[6] || "")) problems.push(`대장 ${m[1]}: 조회일 칸(8번째)이 날짜가 아님`);
     if (cells.some((c) => /미확인/.test(c))) problems.push(`대장 ${m[1]}: 미확인 항목은 대장에 두지 않음`);
     if (cells.length !== 8) problems.push(`대장 ${m[1]}: 칸 수 ${cells.length + 1}개(9개여야 함)`);

@@ -10,7 +10,7 @@
 
 ## 접근 메모 (최신 확인 때 먼저 쓰는 경로)
 
-- 국가법령정보센터(law.go.kr): 조문 원문의 1차 출처다. 법령명 경로(`https://www.law.go.kr/법령/주식회사등의외부감사에관한법률`)로 연다. 본문이 안 읽히거나 점검 중이면 금융감독원 「내부회계관리제도 관련 FAQ」(K14)가 조문 번호를 명시해 인용하므로 그것으로 대신 확인하고, 그렇게 했다고 말한다.
+- 국가법령정보센터(law.go.kr): 조문 원문의 1차 출처다. 법령명 경로(`https://www.law.go.kr/법령/주식회사등의외부감사에관한법률`)로 연다. 본문이 안 읽히거나 점검 중이면 금융감독원 「내부회계관리제도 관련 FAQ」(K14)가 조문 번호를 명시해 인용하므로 그것으로 대신 확인하고, 그렇게 했다고 말한다. FAQ는 첨부(HWPX) 문서라 WebFetch로 본문이 안 읽힐 수 있다. 그때는 금융위원회 보도자료 HTML(본문이 바로 읽힌다)로 확인하고, 그것도 안 되면 실패 문구를 쓴다.
 - 금융위원회 보도자료(fsc.go.kr `/no010101/번호`): HTML 본문이 바로 읽힌다. 목록 검색은 `https://www.fsc.go.kr/no010101?srchKey=all&srchText=내부회계`.
 - 금융감독원(fss.or.kr): 보도자료·자료실 페이지는 요약만 HTML이고 본문은 첨부(PDF·HWP)다. 자료실 목록 `https://www.fss.or.kr/fss/bbs/B0000155/list.do?menuNo=201177`.
 - 한국공인회계사회(kicpa.or.kr): `/board/read.brd?boardId=…&bltnNo=…` 형식은 HTML이 바로 읽힌다.
@@ -53,7 +53,7 @@
 
 | 키 | 정식 명칭 | 발행 | 조문·절 | 요지 | 시행·판 | URL | 조회일 | 변동 |
 |---|---|---|---|---|---|---|---|---|
-| G01 | Internal Control — Integrated Framework (2013), Executive Summary | COSO | Components and Principles(p.6~7) | 5개 구성요소(통제환경·위험평가·통제활동·정보와 의사소통·모니터링 활동)와 17개 원칙을 둔다. 원칙 8은 부정 가능성 고려, 원칙 11은 기술에 대한 일반통제다. | 2013-05 발행 | https://www.coso.org/_files/ugd/3059fc_1df7d5dd38074006bce8fdf621a942cf.pdf | 2026-11-14 | 아니오 |
+| G01 | Internal Control — Integrated Framework (2013), Executive Summary | COSO | Components and Principles(p.6~7), Limitations(p.9) | 5개 구성요소(통제환경·위험평가·통제활동·정보와 의사소통·모니터링 활동)와 17개 원칙을 둔다. 원칙 8은 부정 가능성 고려, 원칙 11은 기술에 대한 일반통제다. 내부통제는 합리적 확신을 줄 뿐 절대적 확신이 아니며, 판단 착오, 단순 실수, 경영진의 통제 무력화, 공모에 의한 회피, 외부 사건 같은 한계가 있다. | 2013-05 발행 | https://www.coso.org/_files/ugd/3059fc_1df7d5dd38074006bce8fdf621a942cf.pdf | 2026-11-14 | 아니오 |
 | G02 | 같은 문서 — 효과적인 내부통제의 요건 | COSO | Effective Internal Control(p.8) | 다섯 구성요소와 관련 원칙이 각각 존재하고 기능하며, 다섯 구성요소가 통합적으로 함께 작동해야 효과적이다. 구성요소·관련 원칙의 존재·기능이나 통합 작동에 major deficiency가 있으면 효과적이라고 결론 내릴 수 없다. | 2013-05 | https://www.coso.org/_files/ugd/3059fc_1df7d5dd38074006bce8fdf621a942cf.pdf | 2026-11-14 | 아니오 |
 | G03 | Achieving Effective Internal Control over Sustainability Reporting (ICSR) | COSO | ICIF-2013: The Basics(p.19~20) | 17원칙을 지속가능성 보고에 적용하는 보충 지침이다. 이 안의 ICIF 개요가 각 원칙을 세분하는 points of focus를 설명한다. | 2023 | https://www.coso.org/_files/ugd/3059fc_a3a66be7a48c47e1a285cef0b1f64c92.pdf | 2026-11-14 | 예 — 2023년 신규 |
 | G04 | Sarbanes-Oxley Act of 2002 Section 302 (15 U.S.C. 7241) | 미국 의회 | §302(a) | CEO·CFO가 연차·분기보고서마다 보고서 검토, 허위·누락 없음, 내부통제 설계·평가 책임을 인증하고, 유의한 미비점·중요한 취약점과 함께 중요성과 무관하게 경영진이나 내부통제에서 유의한 역할을 하는 직원이 관여한 모든 부정을 감사인과 감사위원회에 알린다. | 2002 | https://www.govinfo.gov/content/pkg/USCODE-2023-title15/html/USCODE-2023-title15-chap98-subchapIII-sec7241.htm | 2026-11-14 | 아니오 |

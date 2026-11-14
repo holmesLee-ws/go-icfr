@@ -14,7 +14,7 @@ const read = (p) => readFileSync(join(root, p), "utf8").replace(/\r\n/g, "\n");
 const LEVELS = ["Explain", "Apply", "Evaluate", "Develop"];
 const FIELDS = ["선수", "핵심 질문", "목표", "만들어 볼 것", "국내 근거", "글로벌 비교"];
 const FORMAT = { capstone: "완료 조건" };
-const OFFICIAL = ["law.go.kr", "fsc.go.kr", "fss.or.kr", "dart.fss.or.kr", "klca.or.kr", "k-icfr.org", "kicpa.or.kr", "kasb.or.kr", "krx.co.kr", "korea.kr",
+const OFFICIAL = ["law.go.kr", "fsc.go.kr", "fss.or.kr", "dart.fss.or.kr", "klca.or.kr", "k-icfr.org", "likms.assembly.go.kr", "kicpa.or.kr", "kasb.or.kr", "krx.co.kr", "korea.kr",
   "coso.org", "sec.gov", "ecfr.gov", "govinfo.gov", "congress.gov", "pcaobus.org", "iaasb.org", "ifac.org", "fsa.go.jp", "frc.org.uk", "gov.uk", "theiia.org"];
 const KEY = /\[([KG]\d{2})\]/g;
 

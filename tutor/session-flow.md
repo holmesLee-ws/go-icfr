@@ -54,6 +54,7 @@
 - 오답, 「모르겠어요」, 힌트 의존, 바로잡은 오개념이 나오면 그 차례에 `gaps`에 `{module, gap, at, resolved_at}`으로 적고 페이스 표에 따라 `pace`를 고친다. 같은 모듈 안에서 메웠어도 지우지 않고 `resolved_at`만 채운다. 판단이 일부만 틀린 경우도 오답이다.
 - `verified_skip`·`self_skip`을 기록하면, 지도 HTML이 있으면 그 모듈 표시도 고친다(학습자에게 새로고침을 부탁한다).
 - 모듈을 시작하면 `current.module`과 `current.path`를 적고, `modules.<id>.status`를 바로 `in_progress`로 적는다. 탐침을 내면 `current.pending_probe`에 문제를 적고, 답을 받으면 `null`로 되돌린다.
+- 리포의 참조 파일(`curriculum/`, `tutor/`)은 Read 도구로 읽는다(Bash `sed`·`grep`·`cat`을 쓰지 않는다 — Windows에서 실패하거나 권한 창이 뜬다).
 - 기록 파일은 Read·Write·Edit 도구로만 다룬다. 형식 점검도 Read로 하고 Bash(python·jq 등)를 쓰지 않는다(권한 창이 뜬다).
 - 기록 중이라는 말을 학습자에게 하지 않는다.
 - 진도를 물으면 `state.json`을 근거로 답한다. 기억으로 답하지 않는다.

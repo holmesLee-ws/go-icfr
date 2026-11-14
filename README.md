@@ -26,7 +26,7 @@ claude
 
 **Claude Desktop**
 
-Code 탭에서 데스크탑의 `go-icfr` 폴더를 선택합니다. Chat 탭이 아니라 Code 탭이어야 튜터 규칙이 적용됩니다.
+Desktop으로 하더라도 위의 클론은 터미널에서 먼저 해 둡니다. 그다음 Code 탭에서 데스크탑의 `go-icfr` 폴더를 선택합니다. Chat 탭이 아니라 Code 탭이어야 튜터 규칙이 적용됩니다.
 
 터미널은 macOS에서 Spotlight(⌘+Space)에 「터미널」을 쳐서 열고, Windows에서는 시작 메뉴의 PowerShell을 씁니다. Windows에서 바탕화면이 OneDrive로 옮겨져 있으면 `~/Desktop` 대신 `~/OneDrive/Desktop`(또는 원하는 아무 폴더)에 클론하세요.
 

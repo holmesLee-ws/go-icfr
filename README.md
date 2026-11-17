@@ -8,7 +8,7 @@
 
 ## 시작하기
 
-준비물은 [Git](https://git-scm.com/downloads), [GitHub CLI](https://cli.github.com)(`gh`), [Claude Code](https://code.claude.com/docs) 또는 Claude Desktop입니다. Windows에서는 Git for Windows를 먼저 설치해야 Claude Code가 동작합니다. 비공개 리포이므로 먼저 GitHub에서 보낸 초대를 수락하고, 터미널에서 `gh auth login`으로 로그인합니다. 시작하는 데 다른 설치는 필요 없습니다.
+준비물은 [Git](https://git-scm.com/downloads), [GitHub CLI](https://cli.github.com)(`gh`), [Claude Code](https://code.claude.com/docs) 또는 Claude Desktop입니다. Windows에서는 Git for Windows를 먼저 설치해야 Claude Code가 동작합니다. 공개 리포라 초대 없이 받을 수 있습니다. 터미널에서 `gh auth login`으로 한 번 로그인합니다. 시작하는 데 다른 설치는 필요 없습니다.
 
 ```bash
 cd ~/Desktop
